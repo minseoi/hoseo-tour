@@ -68,9 +68,21 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     try{
       userPosition = await locator.DeterminePosition();
       print('curPos: ${userPosition?.longitude}, ${userPosition?.latitude}');
-
       setState(() {
       });
+
+      // 1m마다 위치 업데이트
+      final LocationSettings locationSettings = LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 1,
+      );
+      StreamSubscription<Position> positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+              (Position? position) {
+            userPosition = position;
+            setState(() {
+            });
+          });
+
     } catch(error) {
       print(error);
       // @TODO: Error Handling
