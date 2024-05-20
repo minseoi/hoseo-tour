@@ -13,14 +13,14 @@ class Pin extends StatefulWidget {
     return _Pin();
   }
 
-  static Vector2 GetScreenPosition(double longitude, double latitude, double centerW, double centerH, double scale)
+  static Vector2 GetScreenPosition(double longitude, double latitude, double centerW, double centerH)
   {
     Vector2 Ret = Vector2.zero();
     double distance = Geolocator.distanceBetween(DataManager().baseLatitude, DataManager().baseLongitude, latitude, longitude);
     var start = Vector2(DataManager().baseLongitude, DataManager().baseLatitude);
     var end = Vector2(longitude, latitude);
     Vector2 nDir = (end - start).normalized();
-    nDir *= distance * scale;
+    nDir *= distance * 1; //scale
     Vector2 center = Vector2(centerW, centerH);
     nDir.y = -nDir.y;
     Ret =  center += nDir;

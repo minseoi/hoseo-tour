@@ -25,7 +25,7 @@ class _MapState extends State<Map> {
 
     //장소 핀 추가
     for(final pinInfo in DataManager().pinInfoList){
-      Vector2 thisPos = Pin.GetScreenPosition(pinInfo.longitude, pinInfo.latitude, _mapImageSize/2, _mapImageSize/2, 1.5);
+      Vector2 thisPos = Pin.GetScreenPosition(pinInfo.longitude, pinInfo.latitude, _mapImageSize/2, _mapImageSize/2);
 
       pinWidgets.add(
           Positioned(
@@ -40,7 +40,7 @@ class _MapState extends State<Map> {
     }
 
     //유저 핀 추가
-    Vector2 thisPos = Pin.GetScreenPosition(widget.userPosition.longitude, widget.userPosition.latitude, _mapImageSize/2, _mapImageSize/2, 1.5);
+    Vector2 thisPos = Pin.GetScreenPosition(widget.userPosition.longitude, widget.userPosition.latitude, _mapImageSize/2, _mapImageSize/2);
     pinWidgets.add(
         Positioned(
           child: Transform.translate(
@@ -88,20 +88,8 @@ class _MapState extends State<Map> {
                 children: [
                   Transform.translate(
                     offset: DataManager().curMapOffset,
-                    child: Image.asset('assets/images/map.png', width: _mapImageSize, height: _mapImageSize),
+                    child: Image.asset('assets/images/map.png', width: _mapImageSize, height: _mapImageSize, fit: BoxFit.contain,),
                   ),
-                  // Positioned(
-                  //   top: _mapImageSize/2 - 25,
-                  //   left: _mapImageSize/2 - 25,
-                  //   child: Transform.translate(
-                  //     offset: DataManager().curMapOffset,
-                  //     child: Container(
-                  //       height: 50,
-                  //       width: 50,
-                  //       color: Colors.cyan;
-                  //     ),
-                  //   ),
-                  // ),
                   ...pinWidgets,
                 ],
               ),

@@ -11,7 +11,13 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: userPosition != null ? Map(userPosition: userPosition!,) : Placeholder(),
+        child: userPosition != null ? Map(userPosition: userPosition!,) :
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('위치정보 가져오는 중...')
+              ],
+            )
     );
   }
 }
