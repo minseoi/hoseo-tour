@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hoseo_tour/first_page.dart';
 import 'package:hoseo_tour/ms_locator.dart';
@@ -16,12 +18,74 @@ void main() async{
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget{
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Splash(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+class Splash extends StatefulWidget{
+
+  @override
+  State<StatefulWidget> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          width: double.infinity,
+         height: double.infinity,
+         decoration: BoxDecoration(
+           image: DecorationImage(
+             image: AssetImage('images/field.jpg'),fit: BoxFit.cover
+           )
+         ),
+
+           child: Center(
+
+            child: Column( children: <Widget>[
+
+              Image.asset('images/hoseo.png', width: 600, height: 500,),
+              Positioned(
+                top: 200, left: 230,
+                child: ElevatedButton(style: ElevatedButton.styleFrom(
+                  minimumSize: Size(170, 70),
+                  textStyle: TextStyle(fontSize: 32),
+                  backgroundColor: Colors.red[400],
+                  foregroundColor: Colors.white,
+                ),
+                    child: Text('시작'),
+                    onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => school_stamp_tour()));
+                    } ),
+              ),
+
+
+
+            ],
+                   ),
+         ),
+      ),
+      ),
+    );
+  }
+}
+
+
+
+class school_stamp_tour extends StatefulWidget {
+  @override
+  State<school_stamp_tour> createState() => _stamptourState();
+}
+
+class _stamptourState extends State<school_stamp_tour> with SingleTickerProviderStateMixin {
   TabController? controller;
   MsLocator locator = MsLocator();
   Position? userPosition;
