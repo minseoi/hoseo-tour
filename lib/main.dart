@@ -121,6 +121,7 @@ class _stamptourState extends State<school_stamp_tour> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
+
     controller = TabController(length: 2, vsync: this);
 
     _initUserPosition();

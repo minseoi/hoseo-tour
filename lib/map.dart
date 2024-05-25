@@ -5,6 +5,8 @@ import 'package:hoseo_tour/data_manager.dart';
 import 'package:hoseo_tour/pin.dart';
 import 'package:vector_math/vector_math.dart';
 
+import 'outArea.dart';
+
 class Map extends StatefulWidget {
 
   Map({required this.userPosition});
@@ -39,7 +41,7 @@ class _MapState extends State<Map> {
             child: Transform.translate(
                 offset: DataManager().curMapOffset,
                 child: Pin(
-                    name: pinInfo.name,
+                    id: pinInfo.id,
                   active: distanceToUser <= 30, // 감지 거리
                 )
             ),
@@ -55,15 +57,19 @@ class _MapState extends State<Map> {
         Positioned(
           child: Transform.translate(
               offset: DataManager().curMapOffset,
-              child: Pin(name: 'user', active: false)
+              child: Pin(id:-1, active: false)
           ),
           top: thisPos.y - 32,
           left: thisPos.x - 48,
         )
     );
 
+    final double distanceFromCenter = Geolocator.distanceBetween(widget.userPosition.latitude, widget.userPosition.longitude, DataManager().baseLatitude, DataManager().baseLongitude);
+    final bool isInArea = distanceFromCenter <= 450;
 
-    return LayoutBuilder(  // LayoutBuilder 추가
+    return !isInArea ?
+    OutArea()
+        : LayoutBuilder(  // LayoutBuilder 추가
       builder: (context, constraints) {
         // Map위젯이 보일 크기
         final containerWidth = constraints.maxWidth;

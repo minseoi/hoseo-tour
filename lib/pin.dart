@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hoseo_tour/data_manager.dart';
+import 'package:hoseo_tour/location_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vector_math/vector_math.dart';
 
 class Pin extends StatefulWidget {
-  Pin({super.key, required this.name, required this.active});
+  Pin({super.key, required this.id, required this.active});
 
-  String name;
+  int id;
   bool active;
 
   @override
@@ -33,18 +35,27 @@ class Pin extends StatefulWidget {
 class _Pin extends State<Pin> {
   @override
   Widget build(BuildContext context) {
+    LocationInfo? locationInfo;
+    if(widget.id != -1) {
+      locationInfo = DataManager().pinInfoList[widget.id];
+    }
+
     return Container(
       width: 96,
       height: 32,
       child: widget.active?
-      ElevatedButton(onPressed: (){print('test');}, child: Text('스탬프'))
+      ElevatedButton(onPressed: (){setStamp(widget.id);}, child: Text('스탬프'))
       : Stack(
         children: [
-          Center(child: Image(image: widget.name == 'user'? AssetImage('assets/images/user.png') : AssetImage('assets/images/pin.png'),)),
-          Center(child: Text('${widget.name}' , textAlign: TextAlign.center, style: TextStyle(fontSize: 16,),)),
+          Center(child: Image(image: widget.id == -1? AssetImage('assets/images/user.png') : AssetImage('assets/images/pin.png'),)),
+          if(widget.id != -1)
+            Center(child: Text('${locationInfo!.name}' , textAlign: TextAlign.center, style: TextStyle(fontSize: 16,),)),
         ],
       ),
     );
   }
 
+  Future<void> setStamp(int placeId) async {
+    DataManager.stampData?.setBool('Place${placeId}', true);
+  }
 }

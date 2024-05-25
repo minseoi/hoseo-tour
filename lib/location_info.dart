@@ -5,4 +5,12 @@ class LocationInfo {
   String name;
   double longitude; // use like X coordinate
   double latitude; // use like Y coordinate
+
+  String ImagePath='';
+  String GetImagePath (bool complete){
+    if(complete)
+      return 'assets/images/${id}C.jpg';
+    else
+      return 'assets/images/${id}.jpg';
+  }
 }
