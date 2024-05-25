@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Splash(),
     );
   }
@@ -36,6 +37,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           width: double.infinity,
@@ -91,6 +93,7 @@ class _stamptourState extends State<school_stamp_tour> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xffAE2D2C),
       ),
