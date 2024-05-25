@@ -42,7 +42,7 @@ class _SplashState extends State<Splash> {
          height: double.infinity,
          decoration: BoxDecoration(
            image: DecorationImage(
-             image: AssetImage('images/field.jpg'),fit: BoxFit.cover
+             image: AssetImage('assets/images/field.jpg'),fit: BoxFit.cover
            )
          ),
 
@@ -50,7 +50,7 @@ class _SplashState extends State<Splash> {
 
             child: Column( children: <Widget>[
 
-              Image.asset('images/hoseo.png', width: 600, height: 500,),
+              Image.asset('assets/images/hoseo.png', width: 600, height: 500,),
               Positioned(
                 top: 200, left: 230,
                 child: ElevatedButton(style: ElevatedButton.styleFrom(
