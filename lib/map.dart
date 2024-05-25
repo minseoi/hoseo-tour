@@ -24,14 +24,24 @@ class _MapState extends State<Map> {
     List<Widget> pinWidgets = [];
 
     //장소 핀 추가
-    for(final pinInfo in DataManager().pinInfoList){
+    for(final pinInfo in DataManager().pinInfoList) {
       Vector2 thisPos = Pin.GetScreenPosition(pinInfo.longitude, pinInfo.latitude, _mapImageSize/2, _mapImageSize/2);
+      double distanceToUser = Geolocator.distanceBetween(
+        pinInfo.latitude,
+        pinInfo.longitude,
+        widget.userPosition.latitude,
+        widget.userPosition.longitude,
+      );
+
 
       pinWidgets.add(
           Positioned(
             child: Transform.translate(
                 offset: DataManager().curMapOffset,
-                child: Pin(name: pinInfo.name)
+                child: Pin(
+                    name: pinInfo.name,
+                  active: distanceToUser <= 30, // 감지 거리
+                )
             ),
             top: thisPos.y - 32,
             left: thisPos.x - 48,
@@ -45,7 +55,7 @@ class _MapState extends State<Map> {
         Positioned(
           child: Transform.translate(
               offset: DataManager().curMapOffset,
-              child: Pin(name: '@유저@')
+              child: Pin(name: 'user', active: false)
           ),
           top: thisPos.y - 32,
           left: thisPos.x - 48,

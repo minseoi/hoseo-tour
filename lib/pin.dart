@@ -4,9 +4,10 @@ import 'package:hoseo_tour/data_manager.dart';
 import 'package:vector_math/vector_math.dart';
 
 class Pin extends StatefulWidget {
-  Pin({super.key, required this.name});
+  Pin({super.key, required this.name, required this.active});
 
   String name;
+  bool active;
 
   @override
   State<StatefulWidget> createState() {
@@ -35,9 +36,11 @@ class _Pin extends State<Pin> {
     return Container(
       width: 96,
       height: 32,
-      child: Stack(
+      child: widget.active?
+      ElevatedButton(onPressed: (){print('test');}, child: Text('스탬프'))
+      : Stack(
         children: [
-          Center(child: Image(image: AssetImage('assets/images/pin.png'),)),
+          Center(child: Image(image: widget.name == 'user'? AssetImage('assets/images/user.png') : AssetImage('assets/images/pin.png'),)),
           Center(child: Text('${widget.name}' , textAlign: TextAlign.center, style: TextStyle(fontSize: 16,),)),
         ],
       ),
