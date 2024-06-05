@@ -8,7 +8,7 @@ class DataManager {
   DataManager._privateConstructor() {
     _loadStampData();
     pinInfoList.add(LocationInfo(id: 0, name: "중앙 잔디", longitude: 127.0751233, latitude: 36.73639));
-    pinInfoList.add(LocationInfo(id: 1, name: "도서관", longitude: 127.0763667, latitude: 36.7373017));
+    pinInfoList.add(LocationInfo(id: 1, name: "학술 정보관", longitude: 127.0763667, latitude: 36.7373017));
     pinInfoList.add(LocationInfo(id: 2, name: "체육관", longitude: 127.072505, latitude: 36.737585));
     pinInfoList.add(LocationInfo(id: 3, name: "강석규", longitude: 127.07476, latitude: 36.7357483));
     pinInfoList.add(LocationInfo(id: 4, name: "대학 교회", longitude: 127.07523, latitude: 36.7381017));
